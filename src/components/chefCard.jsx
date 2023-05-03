@@ -12,12 +12,12 @@ const ChefCard = ({ chef }) => {
           <img src={photo_url} alt="chef photo" className="w-52 h-52" />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">{name}</h2>
+          <h2 className="card-title text-3xl text-color  font-bold">{name}</h2>
           <p>Experience: {experience} Years</p>
           <p>Recipes: {recipes}</p>
           <div className="flex items-center gap-2">
             <div>
-              <TbHeartFilled></TbHeartFilled>
+              <TbHeartFilled className="text-blue-700"></TbHeartFilled>
             </div>
             <div>{likes}</div>
           </div>
