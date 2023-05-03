@@ -1,9 +1,18 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { TbChefHat } from "react-icons/tb";
+import { AuthContext } from "./AuthProvider";
 
 const Header = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
   return (
     <div className="my-container">
       <div className="navbar bg-base-100">
@@ -96,12 +105,23 @@ const Header = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <NavLink to="/login">
-            <button className="btn-outlined">Log In</button>
-          </NavLink>
-          <NavLink to="/register">
-            <button className="btn-outlined">Register</button>
-          </NavLink>
+          {user ? (
+            <div>
+              {" "}
+              <span className="text-color text-xl font-bold">{user.email}</span>
+              <button onClick={handleLogOut} className="btn-outlined">Sign Out</button>
+            </div>
+          ) : (
+            <>
+              {" "}
+              <NavLink to="/login">
+                <button className="btn-outlined">Log In</button>
+              </NavLink>
+              <NavLink to="/register">
+                <button className="btn-outlined">Register</button>
+              </NavLink>
+            </>
+          )}
         </div>
       </div>
     </div>

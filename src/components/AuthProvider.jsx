@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createContext } from "react";
 import {
   getAuth,
@@ -11,6 +11,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   GithubAuthProvider,
+  updateProfile,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 
@@ -18,7 +19,7 @@ export const AuthContext = createContext(null);
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
-  const [googleUser, setGoogleUser] = useState({});
+  const [user, setUser] = useState({});
   const registerUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
@@ -26,7 +27,7 @@ const AuthProvider = ({ children }) => {
   const handleGoogleSignIn = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
-        setGoogleUser(result.user);
+        setUser(result.user);
       })
       .catch((err) => {
         console.log(err.message);
@@ -37,14 +38,49 @@ const AuthProvider = ({ children }) => {
   const handleGitHubSignIn = () => {
     signInWithPopup(auth, gitHubProvider)
       .then((result) => {
-        console.log(result.user);
+        setUser(result.user);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+  const signIn = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const updateUserDetails = (user, name, photo) => {
+    updateProfile(user, {
+      displayName: name,
+      photoURL: photo,
+    })
+      .then(() => {
+        console.log("user updated");
       })
       .catch((err) => {
         console.log(err.message);
       });
   };
 
-  const authInfo = { registerUser, handleGoogleSignIn, googleUser,handleGitHubSignIn };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+  const logOut = () => {
+    return signOut(auth);
+  };
+
+  const authInfo = {
+    registerUser,
+    handleGoogleSignIn,
+    user,
+    handleGitHubSignIn,
+    signIn,
+    logOut,
+  };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
