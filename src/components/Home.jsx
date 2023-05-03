@@ -8,7 +8,7 @@ import Sections from "./Sections";
 const Home = () => {
   const [chefs, setChefs] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/chefdata")
+    fetch("https://assignment-10-server-astro177.vercel.app/chefdata")
       .then((res) => res.json())
       .then((data) => setChefs(data));
   }, []);
