@@ -20,9 +20,7 @@
   @apply font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-blue-600;
 }
 .text-color{
-  @apply bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-400 inline-block text-transparent bg-clip-text
+  @apply bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-400 text-transparent bg-clip-text
 }
 
-.category-hover {
-  @apply hover:bg-slate-300 transition-colors duration-200;
-}
+
