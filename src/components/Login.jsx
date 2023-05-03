@@ -1,28 +1,16 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { TbBrandGithub, TbBrandGoogle, TbEye } from "react-icons/tb";
 import { Link } from "react-router-dom";
+import { AuthContext } from "./AuthProvider";
 
 const Login = () => {
-  const [password, setPassword] = useState("");
-  const [passwordError, serPasswordError] = useState("");
+  const { handleGoogleSignIn } = useContext(AuthContext);
+  const { handleGitHubSignIn } = useContext(AuthContext);
+
   const [showPassword, setShowPassword] = useState(false);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const password = form.password.value;
-    console.log(password);
-  };
-  const handlePassword = (e) => {
-    const passwordInput = e.target.value;
-    setPassword(passwordInput);
-    if (passwordInput.length < 6) {
-      serPasswordError("password must be 6 characters long");
-    } else {
-      serPasswordError("");
-    }
-  };
+  
   return (
     <div className="text-center">
       <h1 className="text-5xl font-semibold text-color mb-8">
@@ -31,25 +19,27 @@ const Login = () => {
       <p>Login using social networks</p>
       <div className="flex justify-center items- gap-8 mt-4 mb-2">
         <div>
-          <button className="text-4xl p-2 bg-slate-800 rounded-full">
+          <button
+            className="text-4xl p-2 bg-slate-800 rounded-full"
+            onClick={handleGoogleSignIn}
+          >
             {" "}
             <TbBrandGoogle />{" "}
           </button>
         </div>
         <div>
-          <button className="text-4xl p-2 bg-slate-800 rounded-full">
+          <button className="text-4xl p-2 bg-slate-800 rounded-full" onClick={handleGitHubSignIn}>
             <TbBrandGithub />
           </button>
         </div>
       </div>
       <p>Or</p>
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className="display: inline-block mt-2">
           <input
             type="email"
             placeholder="Type your email"
             name="email"
-            // value={email}
             required
             className="input input-bordered input-primary w-full max-w-xs mb-6"
           />
@@ -57,16 +47,20 @@ const Login = () => {
             type={showPassword ? "text" : "password"}
             placeholder="Type your password"
             name="password"
-            value={password}
-            onChange={handlePassword}
             required
             className="input input-bordered input-primary w-full max-w-xs"
           />
         </div>
       </form>
-      {passwordError && <span className="error">{passwordError}</span>}
+
       <p className="mt-4 cursor-pointer hover:underline decoration-1">
-         <button className="btn rounded-3xl" onClick={()=>setShowPassword(!showPassword)}>Show Password</button><br />
+        <button
+          className="btn rounded-3xl"
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          {!showPassword ? "Show Password" : "Hide password"}
+        </button>
+        <br />
         Forgot password?
       </p>
       <p className="mb-4">
