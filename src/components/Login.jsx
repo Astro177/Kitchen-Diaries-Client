@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useRef, useState } from "react";
 import { TbBrandGithub, TbBrandGoogle, TbEye } from "react-icons/tb";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
@@ -11,6 +11,10 @@ const Login = () => {
   const auth = getAuth(app);
   const { handleGoogleSignIn, handleGitHubSignIn, signIn } =
     useContext(AuthContext);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -25,6 +29,8 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         console.log(result.user);
+        form.reset();
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.log(err.message);
