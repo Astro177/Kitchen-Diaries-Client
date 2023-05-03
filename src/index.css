@@ -19,8 +19,15 @@
 .default {
   @apply font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-blue-600;
 }
-.text-color{
-  @apply bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-400 text-transparent bg-clip-text
+.text-color {
+  @apply bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-400 text-transparent bg-clip-text;
 }
 
-
+@layer components {
+  .error {
+    @apply text-red-500 text-sm m-0;
+  }
+  .error::before {
+    content: "⚠";
+  }
+}
