@@ -2,9 +2,11 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { TbHeartFilled } from "react-icons/tb";
+import { Link } from "react-router-dom";
 
 const ChefCard = ({ chef }) => {
   const { name, photo_url, id, experience, likes, recipes, bio } = chef;
+
   return (
     <div>
       <div className="card card-side bg-base-100 shadow-xl">
@@ -22,7 +24,7 @@ const ChefCard = ({ chef }) => {
             <div>{likes}</div>
           </div>
           <div className="card-actions justify-end">
-            <button className="btn btn-outlined">View Recipes</button>
+            <Link to="/recipes"><button className="btn btn-outlined">View Recipes</button></Link>
           </div>
         </div>
       </div>

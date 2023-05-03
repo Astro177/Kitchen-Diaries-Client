@@ -4,9 +4,8 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
 
-
 const Register = () => {
-  const { registerUser } = useContext(AuthContext);
+  const { registerUser, updateUserDetails } = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -22,10 +21,11 @@ const Register = () => {
     } else {
       setError("");
     }
-    if ((name, email, password, photo)) {
+    if ((email, password)) {
       registerUser(email, password)
         .then((result) => {
           console.log(result.user);
+          updateUserDetails(result.user,name,photo)
         })
         .catch((err) => {
           console.log(err.message);

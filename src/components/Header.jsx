@@ -104,12 +104,26 @@ const Header = () => {
             </li>
           </ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end flex sm:flex-col md:flex-row">
           {user ? (
-            <div>
+            <div className="flex justify-center items-center">
               {" "}
-              <span className="text-color text-xl font-bold">{user.email}</span>
-              <button onClick={handleLogOut} className="btn-outlined">Sign Out</button>
+              <div>
+                <p className="text-color text-xl font-bold mx-4">
+                  {user.displayName}
+                </p>
+              </div>
+              <div>
+                <button onClick={handleLogOut} className="btn-outlined">
+                  Sign Out
+                </button>
+              </div>
+              <div className="tooltip" data-tip={user.displayName}>
+                <img
+                  src={user.photoURL}
+                  className="w-12 h-12 rounded-full ml-4"
+                />
+              </div>
             </div>
           ) : (
             <>

@@ -74,7 +74,7 @@ const Login = () => {
         <div className="display: inline-block mt-2">
           <input
             type="email"
-            placeholder="Type your email"
+            placeholder="Email"
             name="email"
             ref={emailRef}
             required
@@ -82,7 +82,7 @@ const Login = () => {
           />
           <input
             type={showPassword ? "text" : "password"}
-            placeholder="Type your password"
+            placeholder="Password"
             name="password"
             required
             className="input input-bordered input-primary w-full max-w-xs"

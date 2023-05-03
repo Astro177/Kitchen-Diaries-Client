@@ -20,6 +20,7 @@ const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const [loading,setLoading]=useState(true)
   const registerUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
@@ -54,7 +55,7 @@ const AuthProvider = ({ children }) => {
       photoURL: photo,
     })
       .then(() => {
-        console.log("user updated");
+        setUser("user updated");
       })
       .catch((err) => {
         console.log(err.message);
@@ -64,6 +65,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoading(false)
     });
     return () => {
       unsubscribe();
@@ -80,6 +82,8 @@ const AuthProvider = ({ children }) => {
     handleGitHubSignIn,
     signIn,
     logOut,
+    updateUserDetails,
+    loading
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
