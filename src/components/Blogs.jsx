@@ -55,7 +55,7 @@ const Blogs = () => {
         </p>
       </div>
       <div className="flex justify-end mt-16">
-      <Pdf targetRef={ref} filename="code-example.pdf">
+      <Pdf targetRef={ref} filename="Blogs.pdf">
         {({ toPdf }) => (
           <button onClick={toPdf} className="btn-primary">
             Download Pdf
