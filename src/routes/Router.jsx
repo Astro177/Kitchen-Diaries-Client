@@ -36,12 +36,13 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: "/recipes",
+        path: "/recipes/:id",
         element: (
           <PrivateRoute>
             <RecipeDetails />
           </PrivateRoute>
         ),
+        loader:({params})=> fetch(`https://assignment-10-server-astro177.vercel.app/chefdata/${params.id}`)
       },
     ],
   },

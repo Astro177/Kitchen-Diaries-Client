@@ -14,7 +14,7 @@ const ChefCard = ({ chef }) => {
           <img src={photo_url} alt="chef photo" className="w-52 h-52" />
         </figure>
         <div className="card-body">
-          <h2 className="card-title text-3xl text-color  font-bold">{name}</h2>
+          <h2 className="card-title text-3xl text-color font-bold">{name}</h2>
           <p>Experience: {experience} Years</p>
           <p>Recipes: {recipes}</p>
           <div className="flex items-center gap-2">
@@ -24,7 +24,9 @@ const ChefCard = ({ chef }) => {
             <div>{likes}</div>
           </div>
           <div className="card-actions justify-end">
-            <Link to="/recipes"><button className="btn btn-outlined">View Recipes</button></Link>
+            <Link to={`/recipes/${id}`}>
+              <button className="btn btn-outlined">View Recipes</button>
+            </Link>
           </div>
         </div>
       </div>

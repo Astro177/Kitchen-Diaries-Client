@@ -24,8 +24,7 @@ const Register = () => {
     if ((email, password)) {
       registerUser(email, password)
         .then((result) => {
-          console.log(result.user);
-          updateUserDetails(result.user,name,photo)
+          updateUserDetails(result.user, name, photo);
         })
         .catch((err) => {
           console.log(err.message);
