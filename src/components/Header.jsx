@@ -73,7 +73,7 @@ const Header = () => {
           <Link to="/" className="btn btn-ghost normal-case text-xl">
             {" "}
             <TbChefHat className="mx-4" />
-            Kitchen Dairies{" "}
+            Kitchen Diaries{" "}
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">

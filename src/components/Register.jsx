@@ -21,10 +21,14 @@ const Register = () => {
     } else {
       setError("");
     }
-    if ((email, password)) {
+    if ((!email, !password, !name, !photo)) {
+      setError("Please provide valid information");
+      return;
+    } else {
       registerUser(email, password)
         .then((result) => {
           updateUserDetails(result.user, name, photo);
+          e.target.reset();
         })
         .catch((err) => {
           console.log(err.message);
@@ -36,12 +40,13 @@ const Register = () => {
       <p className="text-4xl text-color mb-8">
         New to our website? Register now!
       </p>
-      <div className=" mb-4">
+      <form className=" mb-4">
         <div>
           <input
             onChange={(e) => setName(e.target.value)}
             type="text"
             placeholder="Name"
+            required
             className="input input-bordered input-primary w-full max-w-xs mb-6"
           />
         </div>
@@ -50,6 +55,7 @@ const Register = () => {
             onChange={(e) => setEmail(e.target.value)}
             type="email"
             placeholder="Email"
+            required
             className="input input-bordered input-primary w-full max-w-xs mb-6"
           />
         </div>
@@ -57,20 +63,22 @@ const Register = () => {
           <input
             onChange={(e) => setPassword(e.target.value)}
             type="password"
+            required
             placeholder="Password"
             className="input input-bordered input-primary w-full max-w-xs mb-6"
           />
-          <p className="error">{error}</p>
         </div>
         <div>
           <input
             onChange={(e) => setPhoto(e.target.value)}
             type="text"
             placeholder="Photo URL"
+            required
             className="input input-bordered input-primary w-full max-w-xs "
           />
         </div>
-      </div>
+      </form>
+      <p className="error">{error}</p>
       <p className="mb-2">
         Already have an account?{" "}
         <Link

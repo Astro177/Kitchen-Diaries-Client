@@ -17,6 +17,7 @@ const Login = () => {
   const from = location.state?.from?.pathname || "/";
 
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState();
 
   const emailRef = useRef();
   const handleSignIn = (e) => {
@@ -30,10 +31,11 @@ const Login = () => {
       .then((result) => {
         console.log(result.user);
         form.reset();
+        <Link to='/'/>
         navigate(from, { replace: true });
       })
       .catch((err) => {
-        console.log(err.message);
+        setError(err.message);
       });
   };
 
@@ -94,7 +96,7 @@ const Login = () => {
             className="input input-bordered input-primary w-full max-w-xs"
           />
         </div>
-
+       <p className="text-red-800">{error}</p>
         <p className="mt-4 cursor-pointer hover:underline decoration-1">
           <button
             className="btn rounded-3xl"
