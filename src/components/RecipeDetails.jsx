@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { TbHeartFilled } from "react-icons/tb";
 import { useLoaderData } from "react-router-dom";
+import RecipeCard from "./RecipeCard";
 
 const RecipeDetails = () => {
   const chef = useLoaderData();
@@ -38,8 +39,8 @@ const RecipeDetails = () => {
           </div>
         </div>
       </div>
-      <div>
-        
+      <div className="my-container grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center items-center">
+        {recipe.map((dish)=>(<RecipeCard key={dish.name} dish={dish}/>))}
       </div>
     </div>
   );
