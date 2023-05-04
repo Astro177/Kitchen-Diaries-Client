@@ -6,7 +6,7 @@ import Lottie from "lottie-react";
 const Banner = () => {
   return (
     <div>
-      <div className="flex sm:flex-col md:flex-row justify-around items-center my-container">
+      <div className="md:flex justify-around items-center my-container">
         <div>
           <Lottie animationData={Cook} />
         </div>
