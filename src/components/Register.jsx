@@ -29,7 +29,7 @@ const Register = () => {
       registerUser(email, password)
         .then((result) => {
           updateUserDetails(result.user, name, photo);
-          e.target.reset();
+          navigate('/');
         })
         .catch((err) => {
           console.log(err.message);

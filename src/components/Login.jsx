@@ -25,13 +25,11 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
 
     signIn(email, password)
       .then((result) => {
         console.log(result.user);
         form.reset();
-        <Link to='/'/>
         navigate(from, { replace: true });
       })
       .catch((err) => {
@@ -96,7 +94,7 @@ const Login = () => {
             className="input input-bordered input-primary w-full max-w-xs"
           />
         </div>
-       <p className="text-red-800">{error}</p>
+        <p className="text-red-800">{error}</p>
         <p className="mt-4 cursor-pointer hover:underline decoration-1">
           <button
             className="btn rounded-3xl"

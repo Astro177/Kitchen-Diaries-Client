@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
@@ -14,11 +15,9 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
-import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
-const navigate = useNavigate;
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
@@ -33,7 +32,6 @@ const AuthProvider = ({ children }) => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         setUser(result.user);
-        navigate("/")
       })
       .catch((err) => {
         console.log(err.message);
