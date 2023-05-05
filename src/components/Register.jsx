@@ -6,7 +6,6 @@ import { AuthContext } from "./AuthProvider";
 
 const Register = () => {
   const { registerUser, updateUserDetails } = useContext(AuthContext);
-  const navigate = useNavigate;
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -29,7 +28,7 @@ const Register = () => {
       registerUser(email, password)
         .then((result) => {
           updateUserDetails(result.user, name, photo);
-          navigate('/');
+          setError("");
         })
         .catch((err) => {
           console.log(err.message);

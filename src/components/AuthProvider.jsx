@@ -59,7 +59,7 @@ const AuthProvider = ({ children }) => {
       photoURL: photo,
     })
       .then(() => {
-        setUser("user updated");
+        setUser();
       })
       .catch((err) => {
         console.log(err.message);
