@@ -54,12 +54,13 @@ const AuthProvider = ({ children }) => {
   };
 
   const updateUserDetails = (user, name, photo) => {
+    setLoading(true);
     updateProfile(user, {
       displayName: name,
       photoURL: photo,
     })
-      .then(() => {
-        setUser();
+    .then(() => {
+      setUser();
       })
       .catch((err) => {
         console.log(err.message);
