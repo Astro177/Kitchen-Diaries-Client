@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
 
 const Register = () => {
   const { registerUser, updateUserDetails } = useContext(AuthContext);
+  const navigate = useNavigate;
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");

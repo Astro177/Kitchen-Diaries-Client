@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { TbChefHat } from "react-icons/tb";
 import { AuthContext } from "./AuthProvider";
+import ThemeChange from "./ThemeChange";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -132,10 +133,13 @@ const Header = () => {
                 <button className="btn-outlined">Log In</button>
               </NavLink>
               <NavLink to="/register">
-                <button className="btn-outlined">Register</button>
+                <button className="btn-outlined mr-6">Register</button>
               </NavLink>
             </>
           )}
+          <div>
+            <ThemeChange/>
+          </div>
         </div>
       </div>
     </div>

@@ -10,6 +10,7 @@ const RecipeCard = ({ dish }) => {
   const { name, ingredients, cooking_method, rating } = dish;
 
   const [added, setAdded] = useState(false);
+
   const handleFavorite=()=>{
       setAdded(true)
       toast("Added To Favorite")
@@ -21,19 +22,19 @@ const RecipeCard = ({ dish }) => {
           <h2 className="card-title text-4xl text-color font-bold mb-4">
             {name}
           </h2>
-          <p className="font-semibold text-xl mb-2">Ingredients:</p>
+          <p className="font-semibold text-xl text-slate-500 mb-2">Ingredients:</p>
           {ingredients.map((ingredient) => (
-            <li key={ingredient}>{ingredient}</li>
+            <li className="text-slate-500" key={ingredient}>{ingredient}</li>
           ))}
-          <p className="font-semibold text-xl mb-2 mt-4">Cooking Method:</p>
-          <p>{cooking_method}</p>
+          <p className="font-semibold text-xl mb-2 mt-4 text-slate-500">Cooking Method:</p>
+          <p className="text-slate-500">{cooking_method}</p>
           <Rating
             style={{ maxWidth: 100 }}
             value={rating}
             className="text-yellow-400 mt-6"
             readOnly
           />
-          <p className="font-semibold text-lg mb-2">Rating: {rating}</p>
+          <p className="font-semibold text-lg mb-2 text-slate-500">Rating: {rating}</p>
           <div className="card-actions justify-end">
             <button onClick={handleFavorite} className={added?"btn":"btn-outlined"} disabled={added}>{added?"Added to favorite":"Add to favorite"}</button>
             <ToastContainer/>
