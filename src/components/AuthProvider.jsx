@@ -16,11 +16,11 @@ import {
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 
-export const AuthContext = createContext(null);
+export const AuthContext = createContext();
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const registerUser = (email, password) => {
@@ -29,6 +29,7 @@ const AuthProvider = ({ children }) => {
   };
   const googleProvider = new GoogleAuthProvider();
   const handleGoogleSignIn = () => {
+    setLoading(true);
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         setUser(result.user);
@@ -40,6 +41,7 @@ const AuthProvider = ({ children }) => {
   const gitHubProvider = new GithubAuthProvider();
 
   const handleGitHubSignIn = () => {
+    setLoading(true);
     signInWithPopup(auth, gitHubProvider)
       .then((result) => {
         setUser(result.user);
@@ -59,8 +61,8 @@ const AuthProvider = ({ children }) => {
       displayName: name,
       photoURL: photo,
     })
-    .then(() => {
-      setUser();
+      .then(() => {
+        setUser();
       })
       .catch((err) => {
         console.log(err.message);
@@ -69,15 +71,14 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
       setLoading(false);
+      setUser(currentUser);
     });
     return () => {
-      unsubscribe();
+     return unsubscribe();
     };
   }, []);
   const logOut = () => {
-    setLoading(true);
     return signOut(auth);
   };
 

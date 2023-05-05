@@ -138,7 +138,7 @@ const Header = () => {
             </>
           )}
           <div>
-            <ThemeChange/>
+            <ThemeChange />
           </div>
         </div>
       </div>
